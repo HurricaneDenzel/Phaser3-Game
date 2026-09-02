@@ -202,8 +202,8 @@ function hitBomb (player, bomb)
     gameOver = true;
 
     this.time.delayedCall(1000, function () {
-    this.scene.restart();
-    }, [], this);
+        window.location.reload();
+    });
 }
 
 </script>
