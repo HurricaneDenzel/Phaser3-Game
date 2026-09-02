@@ -133,28 +133,37 @@ function create ()
 
 function update ()
 {
-    if (gameOver)
-    {
-        return;
-    }
+    let direction;
 
     if (cursors.left.isDown)
     {
-        player.setVelocityX(-160);
-
-        player.anims.play('left', true);
+        direction = 'left';
     }
     else if (cursors.right.isDown)
     {
-        player.setVelocityX(160);
-
-        player.anims.play('right', true);
+        direction = 'right';
     }
     else
     {
-        player.setVelocityX(0);
+        direction = 'none';
+    }
 
-        player.anims.play('turn');
+    switch (direction)
+    {
+        case 'left':
+            player.setVelocityX(-160);
+            player.anims.play('left', true);
+            break;
+
+        case 'right':
+            player.setVelocityX(160);
+            player.anims.play('right', true);
+            break;
+
+        case 'none':
+            player.setVelocityX(0);
+            player.anims.play('turn');
+            break;
     }
 
     if (cursors.up.isDown && player.body.touching.down)
