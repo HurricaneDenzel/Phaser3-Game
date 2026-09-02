@@ -200,6 +200,10 @@ function hitBomb (player, bomb)
     player.anims.play('turn');
 
     gameOver = true;
+
+    this.time.delayedCall(1000, function () {
+    this.scene.restart();
+    }, [], this);
 }
 
 </script>
