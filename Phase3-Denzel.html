@@ -131,9 +131,10 @@ function create ()
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
 
+
 function update ()
 {
-    let direction;
+    let direction = 'none';
 
     if (cursors.left.isDown)
     {
@@ -143,34 +144,24 @@ function update ()
     {
         direction = 'right';
     }
-    else
-    {
-        direction = 'none';
-    }
 
-    switch (direction)
-    {
-        case 'left':
-            player.setVelocityX(-160);
-            player.anims.play('left', true);
-            break;
+    const movement = {
+        left:  [-160, 'left'],
+        right: [160, 'right'],
+        none:  [0, 'turn']
+    };
 
-        case 'right':
-            player.setVelocityX(160);
-            player.anims.play('right', true);
-            break;
+    player.setVelocityX(movement[direction][0]);
+    player.anims.play(movement[direction][1], true);
 
-        case 'none':
-            player.setVelocityX(0);
-            player.anims.play('turn');
-            break;
-    }
 
+    // Jumping
     if (cursors.up.isDown && player.body.touching.down)
     {
         player.setVelocityY(-330);
     }
 }
+
 
 function collectStar (player, star)
 {
